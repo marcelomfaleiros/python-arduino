@@ -1,0 +1,76 @@
+# encoding: utf-8
+#Programa controla um modulo de 16 reles
+
+from tkinter import *
+from functools import partial
+import visa
+   
+def arduino_comm(x):
+   arduino.write(x)
+   
+def close():
+   arduino_comm("100")   
+   janela.destroy()
+
+janela = Tk()
+janela.title("Stability chamber")
+janela.geometry("750x250+300+20")
+
+rm = visa.ResourceManager()
+arduino = rm.open_resource("COM4", baud_rate = 9600)
+
+bt11 = Button(janela, width=16, text="JD1", fg="red", font=("Arial", 13, "bold"))
+bt11["command"] = partial(arduino_comm, "1") 
+bt11.place(x=20, y=50)
+bt12 = Button(janela, width=16, text="JD2", fg="red", font=("Arial", 13, "bold"))
+bt12["command"] = partial(arduino_comm, "2")
+bt12.place(x=200, y=50)
+bt13 = Button(janela, width=16, text="JD3", fg="red", font=("Arial", 13, "bold"))
+bt13["command"] = partial(arduino_comm, "3")
+bt13.place(x=380, y=50)
+bt14 = Button(janela, width=16, text="JD4", fg="red", font=("Arial", 13, "bold"))
+bt14["command"] = partial(arduino_comm, "4")
+bt14.place(x=560, y=50)
+bt21 = Button(janela, width=16, text="JD5", fg="green", font=("Arial", 13, "bold"))
+bt21["command"] = partial(arduino_comm, "5")
+bt21.place(x=20, y=100)
+bt22 = Button(janela, width=16, text="JD6", fg="green", font=("Arial", 13, "bold"))
+bt22["command"] = partial(arduino_comm, "6")
+bt22.place(x=200, y=100)
+bt23 = Button(janela, width=16, text="JD7", fg="green", font=("Arial", 13, "bold"))
+bt23["command"] = partial(arduino_comm, "7")
+bt23.place(x=380, y=100)
+bt24 = Button(janela, width=16, text="JD8", fg="green", font=("Arial", 13, "bold"))
+bt24["command"] = partial(arduino_comm, "8")
+bt24.place(x=560, y=100)
+bt31 = Button(janela, width=16, text="9", fg="blue", font=("Arial", 13, "bold"))
+bt31["command"] = partial(arduino_comm, "9")
+bt31.place(x=20, y=150)
+bt32 = Button(janela, width=16, text="JD10", fg="blue", font=("Arial", 13, "bold"))
+bt32["command"] = partial(arduino_comm, "10")
+bt32.place(x=200, y=150)
+bt33 = Button(janela, width=16, text="JD11", fg="blue", font=("Arial", 13, "bold"))
+bt33["command"] = partial(arduino_comm, "11")
+bt33.place(x=380, y=150)
+bt34 = Button(janela, width=16, text="JD12", fg="blue", font=("Arial", 13, "bold"))
+bt34["command"] = partial(arduino_comm, "12")
+bt34.place(x=560, y=150)
+bt41 = Button(janela, width=16, text="JD13", fg="black", font=("Arial", 13, "bold"))
+bt41["command"] = partial(arduino_comm, "13")
+bt41.place(x=20, y=200)
+bt42 = Button(janela, width=16, text="JD14", fg="black", font=("Arial", 13, "bold"))
+bt42["command"] = partial(arduino_comm, "14")
+bt42.place(x=200, y=200)
+bt43 = Button(janela, width=16, text="JD15", fg="black", font=("Arial", 13, "bold"))
+bt43["command"] = partial(arduino_comm, "15")
+bt43.place(x=380, y=200)
+bt44 = Button(janela, width=16, text="JD16", fg="black", font=("Arial", 13, "bold"))
+bt44["command"] = partial(arduino_comm, "16")
+bt44.place(x=560, y=200)
+btOFF = Button(janela, width=16, text="Devices OFF", fg="black", font=("Arial", 13, "bold"))
+btOFF["command"] = partial(arduino_comm, "100")
+btOFF.place(x=380, y=10)
+btquit = Button(janela, width=16, text="CLOSE", fg="black", font=("Arial", 13, "bold"), command = close)
+btquit.place(x=560, y=10)
+
+janela.mainloop()
